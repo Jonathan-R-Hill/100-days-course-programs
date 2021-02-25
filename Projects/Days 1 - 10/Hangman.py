@@ -20,9 +20,13 @@ display = []
 
 for letter in chosen_word:
     display += '_'
+
 print(display)
-# Checks input is valid and hasn't already been guessed
+
+
 while lives > 0 and '_' in display:
+    
+    # Checks input is valid and hasn't already been guessed
     while True:
         guess = input('Guess a letter:  ').lower()
         
@@ -32,21 +36,24 @@ while lives > 0 and '_' in display:
         except TypeError:
             print("please enter a letter that you haven't guessed already")
 
-    
+    # checks to see if the input is in the word and enters it if it is. if not it takes 1 life away
     for i in range(0, len_chosen_word):
         if chosen_word[i] == guess:
             display[i] = guess
             
         elif lives >= 1 and guess not in chosen_word:
-            print(f"You're guess: {guess} was wrong. you lost a life")
+            print(f"You're guess: ({guess}) was wrong. you lost a life")
             lives -= 1
             break
         elif lives == 0:
             print("You're out of lives")
             break
     print(f'{lives} lives remaining') 
+    
     print(display)
-    if '_' not in display:
+    
+    # win/loss conditions 
+    if '_' not in display and lives > 0:
         print("You've won!")
         break
            
