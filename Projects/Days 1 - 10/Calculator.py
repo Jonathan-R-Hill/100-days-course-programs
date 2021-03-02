@@ -34,12 +34,12 @@ playing = True
 while playing:
     new_answer = answer(first, operation, second)
     print(new_answer)
+    
     while carry_on() == "yes":
         first = new_answer
         operation = input("*\n/\n-\n+\nPick an operation: ")
         second = float(input("Enter a number: "))
         new_answer = answer(first, operation, second)
-        print(first)
-    
-    else:
-        playing = False
+        print(new_answer)
+
+    playing = False
