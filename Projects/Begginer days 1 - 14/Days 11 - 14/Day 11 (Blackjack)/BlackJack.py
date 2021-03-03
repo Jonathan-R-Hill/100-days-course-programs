@@ -81,6 +81,9 @@ def winner():
     
     if player_total > 21:
         print("You Lost")
+    
+    elif player_total > 21 and ai_total > 21:
+        print("Draw")
         
     elif player_total > ai_total or ai_total > 21:
         print("You Won!")
@@ -90,7 +93,7 @@ def winner():
 
 while True:
     deal()
-    print(player_cards, ai_cards)
+    print(player_cards)
 
     while True:
         if another_card() == True:
