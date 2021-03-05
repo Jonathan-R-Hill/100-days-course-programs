@@ -2,6 +2,12 @@ from Cdata import MENU, resources
 
 user_choice = ""
 cost = 0
+w_res = resources.get("water")
+m_res = resources.get("milk")
+c_res = resources.get("coffee")
+Rwater = 0
+Rmilk = 0
+Rcoffee = 0
 
 def choice():
     while True:
@@ -18,33 +24,32 @@ def choice():
 
 def resource_check():
     global cost
-    enough_resources = True
+    global w_res
+    global m_res
+    global c_res
+    global Rwater 
+    global Rmilk
+    global Rcoffee
     
-    w_res = resources.get("water")
-    m_res = resources.get("milk")
-    c_res = resources.get("coffee")
-
     cost = MENU[user_choice].get("cost")
 
-    
     Rwater = MENU[user_choice].get("ingredients")["water"]
     Rmilk = MENU[user_choice].get("ingredients")["milk"]
     Rcoffee = MENU[user_choice].get("ingredients")["coffee"]
-
     
     if Rwater <= w_res and Rmilk <= m_res and Rcoffee <= c_res: 
-        enough_resources = True 
-    else: 
-        enough_resources = False
-
-      
-    if enough_resources == False:
-        print("Insufficient Resources available")
-        return False   
-    else:
         return True
+    else:
+        return False  
+    
 
 def pay():
+    global cost
+    global w_res
+    global m_res
+    global c_res
+
+    
     pounds = float(input("How many pound coins do you insert?: £"))
     pence = float(input("How many pennies do you insert: "))
     total_payed = round(pounds + (pence / 100), 2)
@@ -52,7 +57,10 @@ def pay():
     if total_payed >= cost:
         print(f"{user_choice} dispensed. Enjoy your drink!")
         print(f"Your change is: {round(total_payed - cost, 2)}")
-    
+        w_res -= Rwater 
+        m_res -= Rmilk
+        c_res -= Rcoffee
+
     elif total_payed < cost:
         print("Youd didn't insert enough momey. You have been refunded")
     
@@ -66,6 +74,6 @@ while True:
         
     else:
         print("Insufficient Resources available. No charge")
-        break
+        
 
       
